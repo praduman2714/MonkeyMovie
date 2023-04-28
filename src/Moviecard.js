@@ -9,7 +9,9 @@ class Moviecard extends Component{
         plot : "American superhero film based on the Marvel Comics superhero team of the same name.In the film, Nick Fury and the spy agency S.H.I.E.L.D. recruit Tony Stark, Steve Rogers, Bruce Banner, Thor, Natasha Romanoff, and Clint Barton to form a team capable of  stopping Thor's brother Loki from subjugating Earth",
         price : 199,
         rating : 9.8,
-        stars : 0
+        stars : 0,
+        fav : false,
+        cart : false
       }
     }
 
@@ -45,8 +47,20 @@ class Moviecard extends Component{
       })
     }
 
+    handleFav = ()=>{
+      this.setState({
+        fav : !this.state.fav
+      })
+    }
+
+    handleCart = ()=>{
+      this.setState({
+        cart : !this.state.cart
+      })
+    }
+
     render() {
-      const {title,plot,price,rating, stars} = this.state;
+      const {title,plot,price,rating, stars, fav, cart} = this.state;
       return (
         <div className="main">
           <div className="movie-card">
@@ -61,14 +75,19 @@ class Moviecard extends Component{
 
               <div className="footer">
                 <div className="rating">{rating}</div>
+
                 <div className="star-dis">
                   <img alt="dec" onClick={this.decreaseStars} className="str-btn" src="https://cdn-icons-png.flaticon.com/128/9146/9146915.png"/>
                   <img alt="stars" className="stars" src= "https://cdn-icons-png.flaticon.com/128/1828/1828884.png"/>
                   <img alt="inc" className="str-btn" onClick={this.increaseStar} src= "https://cdn-icons-png.flaticon.com/128/3524/3524388.png"/>
                   <span className="starCount">{stars}</span>
                 </div>
-                <button className="favourite-btn">Favourite</button>
-                <button className="cart-btn">Add to Cart</button>
+
+                {fav ? <button onClick={this.handleFav} className="unfavourite-btn">Un-favourite</button> : 
+                <button onClick={this.handleFav} className="favourite-btn">Favourite</button>}
+                
+                 <button onClick={this.handleCart} className="cart-btn">{!cart ? "Add To Cart" : "Remove from Cart"}</button> 
+                  
               </div>
               
             </div>
